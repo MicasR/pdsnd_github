@@ -1,0 +1,245 @@
+{% extends "base.html" %}
+
+{%block css_link%}
+<link rel="stylesheet" href="{{url_for('static', filename='dashboard.css')}}">
+{%endblock%}
+
+{%block body %}
+<nav class="drk-bg2 d-flex justify-content-center py-2">
+    <div class="container d-flex align-items-center gap-5 flex-wrap">
+        <a href="{{url_for('index')}}" class="d-block filter-link">
+            <div><i class="bi bi-filter-circle-fill"></i></div>
+        </a>
+    </div>
+</nav>
+
+<main class="my-3">
+    <div class="container-sm d-grid gap-3">
+        <div class="row g-3">
+            <div class="col-12 col-sm-4">
+                <div class="simple-stat-card drk-bg2 d-flex align-items-center">
+                    <div class="card-img d-flex justify-content-center align-items-center drk-bg3"><i class="bi bi-bicycle"></i></div>
+                    <div class="content p-3">
+                        <div>Number Of Trips:</div>
+                        <div class="drk-text2 number_of_trips">{{stats["number_of_trips"]}}</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-sm-4">
+                <div class="simple-stat-card drk-bg2 d-flex align-items-center">
+                    <div class="card-img d-flex justify-content-center align-items-center drk-bg3"><i class="bi bi-clock-fill"></i></div>
+                    <div class="content p-3">
+                        <div>Avg Travel Time:</div>
+                        <div class="drk-text2">{{stats["avg_travel_time"]}}</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-sm-4">
+                <div class="simple-stat-card drk-bg2 d-flex align-items-center">
+                    <div class="card-img d-flex justify-content-center align-items-center drk-bg3"><i class="bi bi-person-fill"></i></div>
+                    <div class="content p-3">
+                        <div>Avg Age:</div>
+                        <div class="drk-text2">{{stats["avg_age"]}}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row g-3">
+            <div class="col-12 col-lg-8">
+                <div class="p-3 drk-bg2"><div><canvas id="myChart"></canvas></div></div>
+            </div>
+            <div class="col-12 col-lg-4">
+                <div>
+                    <table class="table table-dark table-hover table-borderless align-middle table-responsive">
+                        <thead>
+                            <tr>
+                                <th scope="col">Most Common</th>
+                                <th scope="col">Value</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Month</td>
+                                <td>{{stats["most_common_month"]}}</td>
+                            </tr>
+                            <tr>
+                                <td>Day of Week</td>
+                                <td>{{stats["most_common_dow"]}}</td>
+                            </tr>
+                            <tr>
+                                <td>Hour of Day</td>
+                                <td>{{stats["most_common_hod"]}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="row g-3">
+            <div class="col-12">
+                <div>
+                    <table id="data-stream" class="table table-dark table-hover table-borderless align-middle table-responsive table-sm">
+                    </table>
+                    <div class="table-info d-flex justify-content-center align-items-center flex-wrap gap-3">
+                        <div class="info">
+                            <span class="number_rows_showing_in_stream">0
+                            </span> row(s) on page 
+                            <span class="current_page">1</span> of
+                            <span class="total_number_of_pages">1
+                            </span> page(s)
+                        </div>
+                        <div><button onclick = "seeAdjacentPage('prv')" id="prv-page-btn" class="btn btn-primary btn-sm" disabled>< Previous Page</button></div>
+                        <div><button onclick = "seeAdjacentPage('nxt')" id="nxt-page-btn" class="btn btn-primary btn-sm">Next Page ></button></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+{%endblock%}
+
+{%block scripts%}
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    const labels = [
+        'January',
+        'February',
+        'March',
+        'April',
+        'May',
+        'June'
+    ];
+
+    const data = {
+        labels: labels,
+        datasets: [
+            {
+                label: 'All Cities',
+                backgroundColor: 'rgb(255, 99, 132)',
+                borderColor: 'rgb(255, 99, 132)',
+                data: {{stats["trips_month_city"]["All"]}},
+            },
+            {
+                label: 'Chicago',
+                backgroundColor: 'rgb(200, 110, 200)',
+                borderColor: 'rgb(200, 110, 200)',
+                data: {{stats["trips_month_city"]["Chicago"]}},
+            },
+            {
+                label: 'New York',
+                backgroundColor: 'rgb(80, 120, 200)',
+                borderColor: 'rgb(80, 120, 200)',
+                data: {{stats["trips_month_city"]["New York"]}},
+            },
+            {
+                label: 'Washington',
+                backgroundColor: 'rgb(120, 200, 80)',
+                borderColor: 'rgb(120, 200, 80)',
+                data: {{stats["trips_month_city"]["Washington"]}},
+            }
+        ]
+    };
+
+    const config = {
+        type: 'line',
+        data: data,
+        options: {}
+    };
+
+    const myChart = new Chart(
+        document.getElementById('myChart'),config
+    );
+</script>
+
+<script>
+    const createDataStreamTable = (obj) =>{
+        const table = document.getElementById("data-stream")
+        table.innerHTML=""
+        let empty_table = '<thead><tr><th scope="col">#</th><th scope="col">data</th></tr></thead><tbody><tr><th>0</th><td>None</td></tr></tbody>'
+
+        if (Object.keys(obj.data_stream).length === 0){
+            table.innerHTML = empty_table
+        }else {
+            //Set table headers
+            let tableHeader = '<thead><tr><th scope="col">#</th>'
+            for(key of Object.keys(obj.data_stream)){
+                tableHeader +=`<th scope="col">${key}</th>`
+            }
+            tableHeader += '</tr></thead>'
+            table.innerHTML = tableHeader
+
+            //Set table rows
+            let tableRows = '<tbody>'
+
+            for(row of Object.keys(obj.data_stream.Gender)){
+                tableRows += `<th>${row}</th>`
+                for (column of Object.keys(obj.data_stream)){
+                    tableRows += `<td>${obj.data_stream[column][row]}</td>`
+                }
+                tableRows += '</tr>'
+            }
+            tableRows +='</tbody>'
+            table.innerHTML += tableRows
+        }
+    }
+
+    const setTableInformation = (data) => {
+        if(Object.keys(data.data_stream).length !== 0){
+            document.getElementsByClassName("current_page")[0].innerHTML = data.page
+            document.getElementsByClassName("number_rows_showing_in_stream")[0].innerHTML = Object.keys(data.data_stream["Start Time"]).length
+            numberOfTrips = document.getElementsByClassName("number_of_trips")[0].innerHTML
+            if(numberOfTrips !== 'None'){
+                numberOfTrips_int = parseInt(numberOfTrips.replace(/,/g, ''))
+                if((Math.floor(numberOfTrips_int / data.rowsPerPage)) * data.rowsPerPage === numberOfTrips_int){
+                    document.getElementsByClassName("total_number_of_pages")[0].innerHTML = (Math.floor(numberOfTrips_int / data.rowsPerPage))
+                } else{
+                    document.getElementsByClassName("total_number_of_pages")[0].innerHTML = (Math.floor(numberOfTrips_int / data.rowsPerPage)) +1
+                }
+            }
+        }
+    }
+
+    const getStream = (filters = {{ formated_filters |tojson|safe }}, rowsPerPage = 15, page = 1) => {
+        axios.post('{{url_for("stream_data")}}', {
+            filters: filters,
+            rowsPerPage  : rowsPerPage,
+            page : page,
+        })
+        .then((result) => {
+            createDataStreamTable(result.data)
+            setTableInformation(result.data)
+        })
+        .catch((err) => {
+            alert("An error occurred.")
+        });
+    }
+
+
+    const seeAdjacentPage = (direction) =>{
+        const nxtBtn = document.getElementById("nxt-page-btn")
+        const prvBtn = document.getElementById("prv-page-btn")
+
+        const currentPageElement = document.getElementsByClassName("current_page")[0]
+        const totalNumberOfPages = document.getElementsByClassName("total_number_of_pages")[0]
+
+        let currentPage = parseInt(currentPageElement.innerHTML);
+        let pageMax = parseInt(totalNumberOfPages.innerHTML);
+
+        let see_page = currentPage;
+
+        if (direction === "nxt" && currentPage < pageMax)  {see_page += 1}
+        if (direction === "prv" && currentPage > 1) {see_page -= 1}
+
+        if(see_page >= pageMax){nxtBtn.disabled = true}else{nxtBtn.disabled = false}
+        if(see_page <= 1){prvBtn.disabled = true}else{prvBtn.disabled = false}
+
+        getStream(filters = {{ formated_filters |tojson|safe }}, rowsPerPage = 15, page=see_page)
+
+    }
+
+    window.addEventListener("onload",getStream())
+</script>
+{%endblock%}

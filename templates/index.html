@@ -1,0 +1,130 @@
+{% extends "base.html" %}
+
+{%block css_link%}
+<link rel="stylesheet" href="{{url_for('static', filename='index.css')}}">
+{%endblock%}
+
+{% block body %}
+    <div class="filter-body d-flex justify-content-center">
+        <div class="filter-form my-0 my-sm-5 p-3 drk-bg2">
+            <div class="filter-form-head"><h2>Filter Data:</h2></div>
+            <div class="filter-form-bofy">
+                <form id="query-form" action="{{url_for('dashboard')}}" method="get">
+                    <h5 class="city-label">Cities:</h5>
+                    <div class="cities d-flex justify-content-between flex-wrap gap-2">
+                        <div class="city">
+                            <input type="checkbox" name="city-chicago" id="chicago" checked>
+                            <label for="chicago">Chicago</label>
+                        </div>
+                        <div class="city">
+                            <input type="checkbox" name="city-new-york" id="new-york" checked>
+                            <label for="new-york">New York</label>
+                        </div>
+                        <div class="city">
+                            <input type="checkbox" name="city-washington" id="washington" checked>
+                            <label for="washington">Washington</label>
+                        </div>
+                    </div>
+
+                    <h5 class="trip-label mt-4 mb-1">Date:</h5>
+                    <div class="trip-period d-flex justify-content-between flex-wrap gap-3">
+                        <div class="period">
+                            <div><label for="date-from">From:</label></div>
+                            <div><input class="drk-text4" type="date" name="date-from" id="date-from" min="2017-01-01" max="2017-07-09" value="2017-01-01"></div>
+                        </div>
+                        <div class="period">
+                            <div><label for="date-Thru">Thru:</label></div>
+                            <div><input class="drk-text4" type="date" name="date-thru" id="date-thru" min="2017-01-01" max="2017-07-09" value="2017-07-09"></div>
+                        </div>
+                    </div>
+
+                    <h5 class="duration-label mt-4 mb-1">Duration (in seconds):</h5>
+                    <div class="trip-duration d-flex justify-content-between flex-wrap gap-3">
+                        <div class="duration">
+                            <div><label for="min-duration">Min:</label></div>
+                            <div><input class="drk-text4" type="number" name="min-duration" id="min-duration" min=0 max=215576 placeholder=60></div>
+                        </div>
+                        <div class="duration">
+                            <div><label for="max-duration">Max:</label></div>
+                            <div><input class="drk-text4" type="number" name="max-duration" id="max-duration" min=0 max=215576 placeholder=215576></div>
+                        </div>
+                    </div>
+
+                    <h5 class="user-type-label mt-4">User Type:</h5>
+                    <div class="user-types d-flex justify-content-between flex-wrap gap-2">
+                        <div class="user-type">
+                            <input type="checkbox" name="user-type-subscriber" id="user-type-Subscriber" checked>
+                            <label for="user-type-Subscriber">Subscriber</label>
+                        </div>
+                        <div class="user-type">
+                            <input type="checkbox" name="user-type-customer" id="user-type-Customer" checked>
+                            <label for="user-type-Customer">Customer</label>
+                        </div>
+                        <div class="user-type">
+                            <input type="checkbox" name="user-type-dependent" id="user-type-Dependent" checked>
+                            <label for="user-type-Dependent">Dependent</label>
+                        </div>
+                        <div class="user-type">
+                            <input type="checkbox" name="user-type-unknown" id="user-type-unknown" checked>
+                            <label for="user-type-unknown">Unknown</label>
+                        </div>
+                    </div>
+
+                    <h5 class="duration-label mt-4 mb-1">Users Ages:</h5>
+                    <div class="trip-duration d-flex justify-content-between flex-wrap gap-3">
+                        <div class="duration">
+                            <div><label for="min-age">Min Age:</label></div>
+                            <div><input class="drk-text4" type="number" name="min-age" id="min-age" min=0 placeholder=0></div>
+                        </div>
+                        <div class="duration">
+                            <div><label for="max-age">Max Age:</label></div>
+                            <div><input class="drk-text4" type="number" name="max-age" id="max-age" min=0 placeholder=133></div>
+                        </div>
+                    </div>
+                    <div class="d-flex flex-wrap gap-3 mt-2">
+                        <div class="unknown-age">
+                            <input type="checkbox" name="include-known-age" id="include-known-age" checked>
+                            <label for="include-known-age">Include known age</label>
+                        </div>
+                        <div class="unknown-age">
+                            <input type="checkbox" name="include-unknown-age" id="include-unknown-age" checked>
+                            <label for="include-unknown-age">Include unknown age</label>
+                        </div>
+                    </div>
+
+                    <h5 class="user-type-label mt-4">Gender:</h5>
+                    <div class="user-types d-flex justify-content-between flex-wrap gap-3">
+                        <div class="user-type">
+                            <input type="checkbox" name="gender-male" id="Male" checked>
+                            <label for="Male">Male</label>
+                        </div>
+                        <div class="user-type">
+                            <input type="checkbox" name="gender-female" id="Female" checked>
+                            <label for="Female">Female</label>
+                        </div>
+                        <div class="user-type">
+                            <input type="checkbox" name="gender-unknown" id="Unknown" checked>
+                            <label for="Unknown">Unknown</label>
+                        </div>
+                    </div>
+                    <div class="buttons mt-4 d-flex flex-wrap justify-content-center gap-4 align-content-center">
+                        <button class="btn  btn-lg btn-outline-warning" type="button" onclick="reset_form()">Reset</button>
+                        <button class="btn  btn-lg btn-outline-primary" type="submit">Query</button>
+                    </div>
+                    <div class="mt-4 mb-2 d-flex justify-content-center">
+                        <div>Made by: <span class="drk-text2">Micas</span></div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{%block scripts%}
+<script>
+    function reset_form() {
+        document.getElementById("query-form").reset();
+    }
+
+</script>
+{%endblock%}

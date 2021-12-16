@@ -1,0 +1,75 @@
+:root {
+    /* DARK THEME (drk)*/
+    /* Colors */
+    /* Backgrounds */
+    --drk-bg1: #1e1e1e;
+    --drk-bg2: #171717;
+    --drk-bg3: #2c2c2c;
+    /* Texts */
+    --drk-text1: #A6A6A6;
+    --drk-text2: #EDEDED;
+    /* Utils */
+    --drk-green:#35DA49;
+    --drk-red:#751817;
+    --drk-yellow:#F3B91C;
+    --drk-blue:#2F48D1;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0px;
+    padding: 0px;
+    color:var(--drk-text1)
+}
+
+.drk-bg1{
+    background-color: var(--drk-bg1);;
+}
+
+.drk-bg2{
+    background-color: var(--drk-bg2);;
+}
+
+.drk-bg3{
+    background-color: var(--drk-bg3);;
+}
+
+.drk-bg-blue{
+    background-color: var(--drk-blue);;
+}
+
+.drk-text1{
+    color: var(--drk-text1)
+}
+
+.drk-text2{
+    color: var(--drk-text2)
+}
+
+.drk-text3{
+    color: var(--drk-bg1)
+}
+
+.drk-text4{
+    color: var(--drk-bg2)
+}
+
+.drk-text5{
+    color: var(--drk-bg3)
+}
+
+.drk-text-green{
+    color: var(--drk-green)
+}
+
+.drk-text-red{
+    color: var(--drk-red)
+}
+
+.drk-text-yellow{
+    color: var(--drk-yellow)
+}
+
+.drk-text-blue{
+    color: var(--drk-blue)
+}

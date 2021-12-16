@@ -1,0 +1,23 @@
+@import url("main.css");
+
+nav{
+    font-size: 28px;
+}
+
+nav a:hover {
+    color: var(--drk-text2);
+    text-decoration: none;
+}
+
+nav a i:hover {
+    color: var(--drk-text2);
+}
+
+.card-img{
+    width: 90px;
+    height: 90px;
+}
+
+.card-img i{
+    font-size: 32px;
+}
