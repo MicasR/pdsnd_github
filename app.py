@@ -1,4 +1,3 @@
-import json
 from data_analysis import formater, data, analysis
 from flask import Flask, request, render_template
 
