@@ -17,6 +17,7 @@ Static -> Contains CSS and JS files used by the templates.<br>
 
 
 ### How to install the app
+<em>Check out the how to install video.</em>
 <ol>
     <li>Download the flies and ensure you have the correct python(3.96) version.</li><br>
     <li>Unzip the download folder</li><br>
