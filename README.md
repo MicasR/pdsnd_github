@@ -18,13 +18,13 @@ Static -> Contains CSS and JS files used by the templates.<br>
 
 ### How to install the app
 <ol>
-    <li>Download the flies and ensure you have the correct python(3.96) version.<br><a href="bikeshare">https://github.com/MicasR/pdsnd_github.git</a></li>
-    <li>Unzip the download folder</li>
-    <li>Save the folder on a convenient location like desktop.</li>
-    <li>Open a terminal and change the directory to the project folder.<br>I used a WSL (a linux machine on windows)</li>
-    <li>Run the command bellow to create a virtual environment:<br>$python3.9 -m venv venv</li>
-    <li>Activate the virtual environment by running:<br>$source venv/bin/activate</li>
-    <li>Install the dependencies on the requirements.txt<br>$source venv/bin/activate</li>
-    <li>Run the flask app:<br>$flask run</li>
-    <li>Open the browser and go to:<br><a href="bikeshare data analysis">http://127.0.0.1:5000/</a></li>
+    <li>Download the flies and ensure you have the correct python(3.96) version.<br><a href="bikeshare">https://github.com/MicasR/pdsnd_github.git</a></li><br>
+    <li>Unzip the download folder</li><br>
+    <li>Save the folder on a convenient location like desktop.</li><br>
+    <li>Open a terminal and change the directory to the project folder.<br>I used a WSL (a linux machine on windows)</li><br>
+    <li>Run the command bellow to create a virtual environment:<br><code>$ python3.9 -m venv venv</code></li><br>
+    <li>Activate the virtual environment by running:<br><code>$ source venv/bin/activate</code></li><br>
+    <li>Install the dependencies on the requirements.txt<br><code>$ pip install -r requirements.txt</code></li><br>
+    <li>Run the flask app:<br><code>$ flask run</code></li><br>
+    <li>Open the browser and go to:<br><a href="bikeshare data analysis">http://127.0.0.1:5000/</a></li><br>
 </ol>
