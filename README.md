@@ -1,17 +1,16 @@
->**Note**: Please **fork** the current Udacity repository so that you will have a **remote** repository in **your** Github account. Clone the remote repository to your local machine. Later, as a part of the project "Post your Work on Github", you will push your proposed changes to the remote repository in your Github account.
-
 ### Date created
-Include the date you created this project and README file.
+2021-12-16
 
 ### Project Title
-Replace the Project Title
+bikeshare data Analysis
 
 ### Description
-Describe what your project is about and what it does
+This flask app analyzes bikeshare data for Chicago, New York, and Washington DC and returns a dashboard with statistics.
 
 ### Files used
-Include the files used
-
-### Credits
-It's important to give proper credit. Add links to any repo that inspired you or blogposts you consulted.
-
+app.py -> contains the flask application
+requirements.txt -> contains the dependencies for the project.
+raw_data -> contains all CSV data for each city. ⚠️ git ignored for now.
+data_analysis -> contains all treatments necessary to transform the CSV's into statistics.
+templates -> contains html docs rendered by the app.
+Static -> Contains CSS and JS files used by the templates.
