@@ -1,4 +1,4 @@
-from datetime import datetime, time
+from datetime import datetime
 
 
 def str_is_date(date_string: str, format: str = "%Y-%m-%d") -> bool:
