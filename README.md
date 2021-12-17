@@ -18,7 +18,7 @@ Static -> Contains CSS and JS files used by the templates.<br>
 
 ### How to install the app
 <ol>
-    <li>Download the flies and ensure you have the correct python(3.96) version.<br><a href="bikeshare">https://github.com/MicasR/pdsnd_github.git</a></li><br>
+    <li>Download the flies and ensure you have the correct python(3.96) version.</li><br>
     <li>Unzip the download folder</li><br>
     <li>Save the folder on a convenient location like desktop.</li><br>
     <li>Open a terminal and change the directory to the project folder.<br>I used a WSL (a linux machine on windows)</li><br>
