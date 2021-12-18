@@ -1,17 +1,31 @@
->**Note**: Please **fork** the current Udacity repository so that you will have a **remote** repository in **your** Github account. Clone the remote repository to your local machine. Later, as a part of the project "Post your Work on Github", you will push your proposed changes to the remote repository in your Github account.
-
 ### Date created
-Include the date you created this project and README file.
+2021-12-16
 
 ### Project Title
-Replace the Project Title
+bikeshare data Analysis
 
 ### Description
-Describe what your project is about and what it does
+This flask app analyzes bikeshare data for Chicago, New York, and Washington DC and returns a dashboard with statistics.
 
 ### Files used
-Include the files used
+app.py -> contains the flask application<br>
+requirements.txt -> contains the dependencies for the project.<br>
+raw_data -> contains all CSV data for each city. ⚠️ git ignored for now.<br>
+data_analysis -> contains all treatments necessary to transform the CSV's into statistics.<br>
+templates -> contains html docs rendered by the app.<br>
+Static -> Contains CSS and JS files used by the templates.<br>
 
-### Credits
-It's important to give proper credit. Add links to any repo that inspired you or blogposts you consulted.
 
+### How to install the app
+<em>Check out the how to install video.</em>
+<ol>
+    <li>Download the flies and ensure you have the correct python(3.96) version.</li><br>
+    <li>Unzip the download folder</li><br>
+    <li>Save the folder on a convenient location like desktop.</li><br>
+    <li>Open a terminal and change the directory to the project folder.<br>I used a WSL (a linux machine on windows)</li><br>
+    <li>Run the command bellow to create a virtual environment:<br><code>$ python3.9 -m venv venv</code></li><br>
+    <li>Activate the virtual environment by running:<br><code>$ source venv/bin/activate</code></li><br>
+    <li>Install the dependencies on the requirements.txt<br><code>$ pip install -r requirements.txt</code></li><br>
+    <li>Run the flask app:<br><code>$ flask run</code></li><br>
+    <li>Open the browser and go to:<br><a href="bikeshare data analysis">http://127.0.0.1:5000/</a></li><br>
+</ol>
